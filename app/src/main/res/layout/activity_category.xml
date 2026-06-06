@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5D9B6">
+
+    <LinearLayout
+        android:id="@+id/layout_header_kategori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#40513B"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back_category"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="2dp"
+            android:src="@drawable/logopanah"
+            app:tint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_title_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:text="Kategori"
+            android:textColor="@android:color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/editbox_background"
+        app:iconifiedByDefault="false"
+        app:queryHint="Cari teh di kategori ini..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_header_kategori" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar_category"
+        tools:listitem="@layout/layoutteh" />
+
+    <ImageView
+        android:id="@+id/img_not_found_cat"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/notfound"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar_category" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
