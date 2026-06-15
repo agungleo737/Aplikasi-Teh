@@ -19,6 +19,7 @@ public class category extends AppCompatActivity {
     private RecyclerView rvCategory;
     private TehAdapter adapter;
     private List<Teh> filteredList = new ArrayList<>();
+    private List<Teh> allList = new ArrayList<>();
     private ImageView imgNotFound, btnBack;
     private TextView tvTitle;
     private String kategoriPilihan = "";
@@ -38,6 +39,7 @@ public class category extends AppCompatActivity {
         if (kategoriPilihan != null) {
             tvTitle.setText("Teh " + kategoriPilihan);
         }
+
         rvCategory.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new TehAdapter(this, filteredList);
         rvCategory.setAdapter(adapter);
@@ -50,8 +52,15 @@ public class category extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    adapter.filterList(new ArrayList<>(allList));
+                    rvCategory.setVisibility(View.VISIBLE);
+                    imgNotFound.setVisibility(View.GONE);
+                    return true;
+                }
+
                 List<Teh> searchResult = new ArrayList<>();
-                for (Teh item : filteredList) {
+                for (Teh item : allList) {
                     if (item.getNama().toLowerCase().contains(newText.toLowerCase())) {
                         searchResult.add(item);
                     }
@@ -78,26 +87,39 @@ public class category extends AppCompatActivity {
             @Override
             public void onResponse(Call<TehResponse> call, Response<TehResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<TehModel> semuaTehDariServer = response.body().getData();
+                    List<TehModel> tehserver = response.body().getData();
                     filteredList.clear();
+                    allList.clear();
+
                     if (kategoriPilihan != null) {
-                        for (TehModel model : semuaTehDariServer) {
+                        for (TehModel model : tehserver) {
                             if (model.getKategori().equalsIgnoreCase(kategoriPilihan)) {
                                 String hargaFormat = "Rp " + (int) model.getHarga();
                                 String deskripsiFormat = model.getDeskripsi() != null ? model.getDeskripsi() : "Tidak ada deskripsi.";
-                                filteredList.add(new Teh(
+
+                                String namaGambar     = model.getGambar()     != null ? model.getGambar()     : "";
+                                String namaGambarFull = model.getGambarFull() != null ? model.getGambarFull() : "";
+
+                                Teh teh = new Teh(
+                                        model.getId(),
                                         model.getNamaTeh(),
                                         hargaFormat,
                                         deskripsiFormat,
-                                        R.drawable.teh1,
-                                        R.drawable.img_teh1,
-                                        50,
+                                        namaGambar,
+                                        namaGambarFull,
+                                        model.getStok(),
                                         model.getKategori()
-                                ));
+                                );
+                                filteredList.add(teh);
+                                allList.add(teh);
+                                filteredList.add(teh);
+                                allList.add(teh);
                             }
                         }
                     }
+
                     adapter.notifyDataSetChanged();
+
                     if (filteredList.isEmpty()) {
                         rvCategory.setVisibility(View.GONE);
                         imgNotFound.setVisibility(View.VISIBLE);

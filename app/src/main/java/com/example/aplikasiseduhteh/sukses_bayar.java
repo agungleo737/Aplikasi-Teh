@@ -11,6 +11,9 @@ public class sukses_bayar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sukses_bayar);
+        notifmanager.tambahnotif(this,
+                "Pesanan Berhasil! 🎉",
+                "Pesanan kamu sedang diproses. Terima kasih sudah berbelanja!");
 
         // Tombol Track Order
         Button btnTrack = findViewById(R.id.btn_track);
@@ -28,7 +31,7 @@ public class sukses_bayar extends AppCompatActivity {
                 Intent intent = new Intent(sukses_bayar.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish(); // Tutup activity ini
+                finish();
             }
         });
     }

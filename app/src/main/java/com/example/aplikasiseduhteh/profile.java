@@ -8,51 +8,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class profile extends AppCompatActivity {
 
+    private SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        sessionManager = new SessionManager(this);
+
         View btnTambahProduk = findViewById(R.id.btn_tambah_produk);
         if (btnTambahProduk != null) {
-            btnTambahProduk.setOnClickListener(v -> {
-                Intent intent = new Intent(profile.this, InputProdukActivity.class);
-                startActivity(intent);
-            });
+            btnTambahProduk.setOnClickListener(v ->
+                    startActivity(new Intent(profile.this, InputProdukActivity.class)));
         }
 
-        // 1. PINDAH KE MANAGE ACCOUNT
         View btnManageAccount = findViewById(R.id.btn_manage_account);
         if (btnManageAccount != null) {
-            btnManageAccount.setOnClickListener(v -> {
-                Intent intent = new Intent(profile.this, manage_profile.class);
-                startActivity(intent);
-            });
+            btnManageAccount.setOnClickListener(v ->
+                    startActivity(new Intent(profile.this, manage_profile.class)));
         }
 
-        // 2. PINDAH KE NOTIFIKASI
         View btnNotifikasi = findViewById(R.id.btn_notifications);
         if (btnNotifikasi != null) {
-            btnNotifikasi.setOnClickListener(v -> {
-                Intent intent = new Intent(profile.this, notifuy.class);
-                startActivity(intent);
-            });
+            btnNotifikasi.setOnClickListener(v ->
+                    startActivity(new Intent(profile.this, notifuy.class)));
         }
 
-        // 3. PINDAH KE PASSWORD & SECURITY
         View btnPasswordSecurity = findViewById(R.id.btn_password_security);
         if (btnPasswordSecurity != null) {
-            btnPasswordSecurity.setOnClickListener(v -> {
-                // Nama class harus sesuai dengan file password_secur.java lo
-                Intent intent = new Intent(profile.this, password_secur.class);
-                startActivity(intent);
-            });
+            btnPasswordSecurity.setOnClickListener(v ->
+                    startActivity(new Intent(profile.this, password_secur.class)));
         }
 
-        // 4. LOGOUT
         View btnLogout = findViewById(R.id.menu_logout_manual);
         if (btnLogout != null) {
             btnLogout.setOnClickListener(v -> {
+                sessionManager.clearsession();
                 Toast.makeText(this, "Berhasil Keluar", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(profile.this, login.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -69,13 +61,10 @@ public class profile extends AppCompatActivity {
         if (nav != null) {
             nav.findViewById(R.id.logohome).setOnClickListener(v ->
                     startActivity(new Intent(profile.this, MainActivity.class)));
-
             nav.findViewById(R.id.logoesplor).setOnClickListener(v ->
                     startActivity(new Intent(profile.this, eksplorasi.class)));
-
             nav.findViewById(R.id.logopaporit).setOnClickListener(v ->
                     startActivity(new Intent(profile.this, paporitactivity.class)));
-
             nav.findViewById(R.id.belanjaya).setOnClickListener(v ->
                     startActivity(new Intent(profile.this, keranjang.class)));
         }

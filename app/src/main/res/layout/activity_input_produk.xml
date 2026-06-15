@@ -43,22 +43,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="25dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama File Gambar"
-                android:textColor="#40513B"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
-            <EditText
-                android:id="@+id/et_gambar_teh"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dp"
-                android:background="@android:drawable/editbox_background"
-                android:hint="Masukan gambar"
-                android:paddingHorizontal="15dp"
-                android:inputType="text" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,6 +126,42 @@
                 android:inputType="textMultiLine"
                 android:padding="15dp"
                 android:layout_marginBottom="25dp" />
+
+            <!-- Thumbnail -->
+            <Button
+                android:id="@+id/btn_pilih_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih Foto Thumbnail (Card Kecil)"
+                android:backgroundTint="#5C8A5C"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <ImageView
+                android:id="@+id/img_preview_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:background="#E8E8E8"
+                android:layout_marginBottom="12dp"/>
+            <Button
+                android:id="@+id/btn_pilih_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih Foto Detail (Halaman Detail)"
+                android:backgroundTint="#3A6B3A"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <ImageView
+                android:id="@+id/img_preview_full"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:background="#E8E8E8"
+                android:layout_marginBottom="12dp"/>
             <Button
                 android:id="@+id/btn_simpan_teh"
                 android:layout_width="match_parent"

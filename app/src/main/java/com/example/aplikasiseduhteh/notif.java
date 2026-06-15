@@ -1,5 +1,6 @@
 package com.example.aplikasiseduhteh;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,17 @@ import java.util.List;
 
 public class notif extends RecyclerView.Adapter<notif.ViewHolder> {
     private List<notifmodel> notifList;
+    private Context context;
+    private OnListEmptyListener emptyListener;
 
-    public notif(List<notifmodel> notifList) {
+    public interface OnListEmptyListener {
+        void onListEmpty();
+    }
+
+    public notif(Context context, List<notifmodel> notifList, OnListEmptyListener emptyListener) {
+        this.context = context;
         this.notifList = notifList;
+        this.emptyListener = emptyListener;
     }
 
     @NonNull
@@ -44,10 +53,16 @@ public class notif extends RecyclerView.Adapter<notif.ViewHolder> {
                 if (item.getTitle().equals("Hapus")) {
                     notifList.remove(currentPos);
                     notifyItemRemoved(currentPos);
+                    notifyItemRangeChanged(currentPos, notifList.size());
+                    notifmanager.saveList(context, notifList);
+                    if (notifList.isEmpty() && emptyListener != null) {
+                        emptyListener.onListEmpty();
+                    }
                 } else if (item.getTitle().equals("Sematkan")) {
                     notifmodel pinned = notifList.remove(currentPos);
                     notifList.add(0, pinned);
                     notifyDataSetChanged();
+                    notifmanager.saveList(context, notifList);
                     Toast.makeText(v.getContext(), "Berhasil disematkan", Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -70,7 +85,7 @@ public class notif extends RecyclerView.Adapter<notif.ViewHolder> {
             super(itemView);
             tvJudul = itemView.findViewById(R.id.tv_notif_judul);
             tvPesan = itemView.findViewById(R.id.tv_notif_pesan);
-            ivIcon = itemView.findViewById(R.id.iv_notif_icon);
+            ivIcon  = itemView.findViewById(R.id.iv_notif_icon);
             btnMore = itemView.findViewById(R.id.btn_more);
         }
     }
