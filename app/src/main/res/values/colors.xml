@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="seduh_dark_green">#5B6E4E</color>
+    <color name="seduh_light_cream">#F5F5E9</color>
+</resources>
