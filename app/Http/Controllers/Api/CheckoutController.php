@@ -19,8 +19,12 @@ class CheckoutController extends Controller
 
         $produkId   = $request->produk_id;
         $jumlahBeli = $request->jumlah_beli;
+<<<<<<< HEAD
         $userId     = $request->user()->id;   
         return DB::transaction(function () use ($produkId, $jumlahBeli, $userId) {
+=======
+        return DB::transaction(function () use ($produkId, $jumlahBeli) {
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
             $produk = Produk::lockForUpdate()->find($produkId);
 
             if (!$produk) {
@@ -44,7 +48,10 @@ class CheckoutController extends Controller
 
             // Simpan order
             $order = Order::create([
+<<<<<<< HEAD
                 'user_id'      => $userId,
+=======
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
                 'produk_id'    => $produkId,
                 'nama_produk'  => $produk->nama_teh,
                 'jumlah_beli'  => $jumlahBeli,
@@ -62,6 +69,7 @@ class CheckoutController extends Controller
             ], 201);
         });
     }
+<<<<<<< HEAD
 
     public function storeBatch(Request $request)
     {
@@ -120,4 +128,6 @@ class CheckoutController extends Controller
             ],
         ], 201);
     }
+=======
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
 }

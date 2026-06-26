@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\AuthController;
+<<<<<<< HEAD
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\LaporanController;
@@ -61,4 +62,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/produk',    [AdminController::class, 'daftarProduk']);
         Route::get('/admin/transaksi', [AdminController::class, 'daftarTransaksi']);
     });
+=======
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login',    [AuthController::class, 'login']);
+
+Route::get('/produk', [ProdukController::class, 'index']);
+Route::get('/produk/best-seller', [ProdukController::class, 'getBestSeller']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout',   [AuthController::class, 'logout']);
+    Route::post('/produk',   [ProdukController::class, 'store']);
+    Route::post('/tambah-teh', [ProdukController::class, 'store']);
+    Route::post('/checkout', [App\Http\Controllers\Api\CheckoutController::class, 'store']);
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
 });

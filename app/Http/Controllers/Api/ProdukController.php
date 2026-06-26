@@ -4,16 +4,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Order;
+<<<<<<< HEAD
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+=======
+use Illuminate\Http\Request;
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
 use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
         $teh = Produk::with('kategoriRelasi:id,nama_kategori')->orderBy('id', 'asc')->get();
+=======
+        $teh = Produk::orderBy('id', 'asc')->get();
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
         return response()->json([
             'success' => true,
             'message' => 'Daftar Menu',
@@ -26,11 +34,19 @@ class ProdukController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_teh'    => 'required|max:50',
             'kategori'    => 'required|max:30',
+<<<<<<< HEAD
             'harga'       => 'required|integer|min:500',
             'deskripsi'   => 'nullable',
             'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'gambar_full' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'stok'        => 'required|integer|min:0'
+=======
+            'harga'       => 'required|numeric|min:500',
+            'deskripsi'   => 'nullable',
+            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar_full' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'stok'        => 'required|numeric'
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
         ]);
 
         if ($validator->fails()) {
@@ -55,6 +71,7 @@ class ProdukController extends Controller
             $file->move(public_path('gambar_teh'), $namaGambarFull);
         }
 
+<<<<<<< HEAD
         // Cari kategori dari nama yang dibuat
         $kategori = Kategori::firstOrCreate(['nama_kategori' => $request->kategori]);
 
@@ -62,6 +79,11 @@ class ProdukController extends Controller
             'user_id'     => $request->user()->id,
             'nama_teh'    => $request->nama_teh,
             'kategori_id' => $kategori->id,
+=======
+        $produk = Produk::create([
+            'nama_teh'    => $request->nama_teh,
+            'kategori'    => $request->kategori,
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
             'harga'       => $request->harga,
             'deskripsi'   => $request->deskripsi,
             'gambar'      => $namaGambar,
@@ -76,6 +98,7 @@ class ProdukController extends Controller
         ], 201);
     }
 
+<<<<<<< HEAD
     public function update(Request $request, $id)
     {
         $produk = Produk::find($id);
@@ -191,6 +214,11 @@ class ProdukController extends Controller
     {
         $bestSeller = Produk::with('kategoriRelasi:id,nama_kategori')
             ->withCount('orders')
+=======
+    public function getBestSeller()
+    {
+        $bestSeller = Produk::withCount('orders')
+>>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
             ->orderBy('orders_count', 'desc')
             ->take(5)
             ->get();
