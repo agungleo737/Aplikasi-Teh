@@ -2,7 +2,6 @@ package com.example.aplikasiseduhteh;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class TehAdapter extends RecyclerView.Adapter<TehAdapter.TehViewHolder> {
@@ -38,32 +38,33 @@ public class TehAdapter extends RecyclerView.Adapter<TehAdapter.TehViewHolder> {
         Teh dataTeh = listTeh.get(position);
         holder.tvNama.setText(dataTeh.getNama());
         holder.tvHarga.setText(dataTeh.getHarga());
-
-        // Menampilkan gambar
-        holder.ivGambar.setImageResource(dataTeh.getGambarKecil());
+        String namaFile = dataTeh.getGambarNama();
+        if (!namaFile.isEmpty() && !namaFile.endsWith(".png") && !namaFile.endsWith(".jpg")) {
+            namaFile = namaFile + ".png";
+        }
+        String urlGambar = ApiClient.gambar_url + namaFile;
+        Glide.with(context)
+                .load(urlGambar)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .into(holder.ivGambar);
 
         // Tombol favorit
-        SharedPreferences sp = context.getSharedPreferences("FavoritTeh", Context.MODE_PRIVATE);
-        boolean isFav = sp.getBoolean(dataTeh.getNama(), false);
+        boolean isFav = FavoritManager.isFavorit(dataTeh.getid());
         holder.btnFavorit.setImageResource(isFav ? R.drawable.paporitfull : R.drawable.paporit1);
 
         holder.btnFavorit.setOnClickListener(v -> {
-            boolean statusNow = sp.getBoolean(dataTeh.getNama(), false);
-            boolean newStatus = !statusNow;
-            sp.edit().putBoolean(dataTeh.getNama(), newStatus).apply();
+            boolean newStatus = !FavoritManager.isFavorit(dataTeh.getid());
+            FavoritManager.toggle(context, dataTeh.getid(), newStatus);
             holder.btnFavorit.setImageResource(newStatus ? R.drawable.paporitfull : R.drawable.paporit1);
 
-            // Jika di halaman favorit dan di-unfavorite, hapus dari list
             if (context instanceof paporitactivity && !newStatus) {
                 int currentPos = holder.getAdapterPosition();
                 if (currentPos != RecyclerView.NO_POSITION) {
                     listTeh.remove(currentPos);
                     notifyItemRemoved(currentPos);
                     notifyItemRangeChanged(currentPos, listTeh.size());
-
-                    if (listTeh.isEmpty()) {
-                        ((paporitactivity) context).updateView();
-                    }
+                    ((paporitactivity) context).updateView();
                 }
             }
         });
@@ -71,14 +72,14 @@ public class TehAdapter extends RecyclerView.Adapter<TehAdapter.TehViewHolder> {
         // Pindah detail
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("ID_TEH", dataTeh.getid());
             intent.putExtra("NAMA_TEH", dataTeh.getNama());
             intent.putExtra("HARGA_TEH", dataTeh.getHarga());
             intent.putExtra("DESKRIPSI_TEH", dataTeh.getDeskripsi());
-            intent.putExtra("GAMBAR_FULL", dataTeh.getGambarFull());
-            intent.putExtra("GAMBAR_KECIL", dataTeh.getGambarKecil());
+            intent.putExtra("GAMBAR_NAMA", dataTeh.getGambarNama());
+            intent.putExtra("GAMBAR_FULL_NAMA", dataTeh.getGambarFullNama());
             intent.putExtra("STOK_TEH", dataTeh.getStok());
             intent.putExtra("KATEGORI_TEH", dataTeh.getKategori());
-
             context.startActivity(intent);
         });
     }
@@ -91,6 +92,7 @@ public class TehAdapter extends RecyclerView.Adapter<TehAdapter.TehViewHolder> {
     public static class TehViewHolder extends RecyclerView.ViewHolder {
         TextView tvNama, tvHarga;
         ImageView ivGambar, btnFavorit;
+
         public TehViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNama = itemView.findViewById(R.id.nama_teh);

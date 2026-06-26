@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="15dp"
     app:cardElevation="4dp">
 
@@ -27,12 +28,16 @@
 
         <ImageView
             android:id="@+id/img_teh"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="12dp"
-            android:scaleType="centerCrop"
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="48dp"
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/teh1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.625"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

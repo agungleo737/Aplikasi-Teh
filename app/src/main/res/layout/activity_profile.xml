@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDF8EE">
+    android:background="#E5D9B6">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -54,6 +54,7 @@
                         android:layout_marginStart="15dp"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_profile_nama"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Amanda Munawaroh"
@@ -61,6 +62,7 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/tv_profile_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="munawarohcantik@gmail.com"
@@ -176,7 +178,7 @@
                         android:background="#22FFFFFF" />
 
                     <LinearLayout
-                        android:id="@+id/btn_language"
+                        android:id="@+id/btn_riwayat"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:clickable="true"
@@ -187,25 +189,24 @@
                         <ImageView
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:src="@drawable/pro15" />
+                            android:src="@drawable/pro3" />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
-                            android:text="Language"
+                            android:text="Riwayat Pesanan"
                             android:textColor="#FFFFFF" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:text="English"
-                            android:textColor="#CCCCCC" />
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/pro6" />
                     </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#22FFFFFF" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <TextView
@@ -256,37 +257,10 @@
                         android:layout_height="1dp"
                         android:background="#22FFFFFF" />
 
-                    <LinearLayout
-                        android:id="@+id/btn_themes"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:paddingHorizontal="16dp">
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:src="@drawable/pro14" />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:text="Themes"
-                            android:textColor="#FFFFFF" />
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/pro6" />
-                    </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#22FFFFFF" />
-
-                    <!-- 🔥 SEKARANG DI SINI SUDAH BERGANTI JADI TAMBAH PRODUK JUALAN -->
                     <LinearLayout
                         android:id="@+id/btn_tambah_produk"
                         android:layout_width="match_parent"
@@ -365,7 +339,7 @@
                     <LinearLayout
                         android:id="@+id/menu_logout_manual"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="60dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:background="?attr/selectableItemBackground"
@@ -397,7 +371,7 @@
         android:id="@+id/bottom_navigation"
         layout="@layout/bottom_nav_layout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

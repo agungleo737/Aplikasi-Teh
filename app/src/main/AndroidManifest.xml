@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +19,38 @@
         android:theme="@style/Theme.AplikasiSeduhTeh"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DaftarPenggunaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TransaksiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PembayaranActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LaporanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TentangKamiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RiwayatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KelolaProdukActivity"
+            android:exported="false" />
         <activity
             android:name=".InputProdukActivity"
             android:exported="false" />
@@ -39,13 +74,7 @@
             android:exported="false" />
         <activity
             android:name=".login"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".register"
             android:exported="false" />

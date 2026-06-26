@@ -21,6 +21,12 @@ public class TehModel {
     @SerializedName("gambar")
     private String gambar;
 
+    @SerializedName("stok")
+    private int stok;
+    @SerializedName("gambar_full")
+    private String gambarFull;
+
+
     // Getter
     public int getId() { return id; }
     public String getNamaTeh() { return namaTeh; }
@@ -28,4 +34,6 @@ public class TehModel {
     public double getHarga() { return harga; }
     public String getDeskripsi() { return deskripsi; }
     public String getGambar() { return gambar; }
+    public String getGambarFull() { return gambarFull; }
+    public int getStok() { return stok; }
 }

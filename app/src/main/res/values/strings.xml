@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">AplikasiSeduhTeh</string>
+    <string name="splash_title">Seduh Teh</string>
+    <string name="tagline">"Nikmati Setiap Tegukan"</string>
+    <string name="title_tentang_kami">Tentang Kami</string>
+    <string name="eyebrow_text">Cerita dari</string>
+    <string name="title_brand">SEDUH WAKTU</string>
+    <string name="slogan_bold">Cerita Hangat di Setiap Seduhan.</string>
+    <string name="slogan_sub">Satu jeda, secangkir teh, dan waktu yang akhirnya jadi milik kamu lagi.</string>
+    <string name="story_title">Cerita Kami</string>
+    <string name="story_p1">Awalnya simpel aja: kami kangen jeda di tengah hari yang buru-buru banget. Eh, pas air panas ketemu daun teh pilihan, rasanya waktu ikut melambat — dari situ, cerita Seduh Waktu mulai diseduh.</string>
+    <string name="story_quote">\"Buat kami, teh enak itu bukan yang diseduh terburu-buru, tapi yang dikasih waktu sepenuh hati.\"</string>
+    <string name="story_p2">Lewat aplikasi ini, kami ngajak kamu buat berhenti sebentar dari hiruk-pikuk, nyeduh teh terbaik dari kebun-kebun Nusantara, dan menikmati waktu yang akhirnya bener-bener jadi milik kamu sendiri.</string>
+    <string name="label_nilai_kami">Nilai Kami</string>
+    <string name="value1_title">Waktu Berkualitas</string>
+    <string name="value1_desc">Ngajak kamu ambil jeda yang tenang di tengah kesibukan, walau cuma secangkir.</string>
+    <string name="value2_title">Cita Rasa Otentik</string>
+    <string name="value2_desc">Daun teh pilihan dari kebun-kebun terbaik Nusantara, diseduh tanpa buru-buru.</string>
+    <string name="value3_title">Kehangatan Tulus</string>
+    <string name="value3_desc">Setiap seduhan dibikin sehangat ngobrol bareng, sedeket cerita yang dibagi sama-sama.</string>
+    <string name="mission_title">Misi Kami</string>
+    <string name="mission1">Bikin ritual nyeduh teh yang bikin tenang, buat siapa aja.</string>
+    <string name="mission2">Dukung petani teh lokal lewat kerja sama yang adil dan terbuka.</string>
+    <string name="mission3">Ngajak orang-orang santai sejenak, satu cangkir teh dalam satu waktu.</string>
+    <string name="footer_thanks">Makasih udah luangin waktu bareng kami.</string>
+    <string name="footer_sign">Tim Seduh Waktu</string>
+    <string name="footer_est">EST. 2025</string>
+    <string name="nav_beranda">Beranda</string>
+    <string name="nav_koleksi">Koleksi</string>
+    <string name="nav_komunitas">Komunitas</string>
+    <string name="nav_tentang">Tentang</string>
+    <string name="desc_back">Kembali</string>
+    <string name="desc_icon">Ikon</string>
+
+    <!-- Panel admin: Daftar Pengguna -->
+    <string name="title_daftar_pengguna">Daftar Pengguna Aplikasi</string>
+    <string name="subtitle_daftar_pengguna">Kelola dan pantau seluruh pengguna terdaftar di platform</string>
+    <string name="hint_search">Cari nama pengguna atau email...</string>
+    <string name="tab_semua">Semua</string>
+    <string name="tab_pembeli">User</string>
+    <string name="tab_penjual">Admin</string>
+    <string name="nav_pengguna">Pengguna</string>
+    <string name="nav_produk">Produk</string>
+    <string name="nav_laporan">Laporan</string>
+    <string name="nav_pengaturan">Pengaturan</string>
 </resources>
