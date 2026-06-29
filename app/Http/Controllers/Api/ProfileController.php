@@ -42,7 +42,9 @@ class ProfileController extends Controller
     {
         $request->validate([
             'current_password' => 'required|string',
-            'new_password'     => 'required|string|min:8|confirmed',
+            'new_password'     => ['required', 'string', 'min:8', 'confirmed', 'regex:/[0-9]/'],
+        ], [
+            'new_password.regex' => 'Password baru harus mengandung minimal 1 angka.',
         ]);
 
         $user = $request->user();

@@ -4,24 +4,25 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Order;
-<<<<<<< HEAD
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-=======
-use Illuminate\Http\Request;
->>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
 use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
-        $teh = Produk::with('kategoriRelasi:id,nama_kategori')->orderBy('id', 'asc')->get();
-=======
-        $teh = Produk::orderBy('id', 'asc')->get();
->>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
+        // Cache 60 detik
+        $teh = Cache::remember('produk_list', 60, function () {
+            return Produk::with('kategoriRelasi:id,nama_kategori')
+                ->withAvg('ulasans', 'rating')
+                ->withCount('ulasans')
+                ->orderBy('id', 'asc')
+                ->get();
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Daftar Menu',
@@ -29,24 +30,23 @@ class ProdukController extends Controller
         ]);
     }
 
+    // Buang cache
+    private function lupakanCacheProduk(): void
+    {
+        Cache::forget('produk_list');
+        Cache::forget('produk_best_seller');
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama_teh'    => 'required|max:50',
             'kategori'    => 'required|max:30',
-<<<<<<< HEAD
             'harga'       => 'required|integer|min:500',
             'deskripsi'   => 'nullable',
             'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'gambar_full' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'stok'        => 'required|integer|min:0'
-=======
-            'harga'       => 'required|numeric|min:500',
-            'deskripsi'   => 'nullable',
-            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'gambar_full' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'stok'        => 'required|numeric'
->>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
         ]);
 
         if ($validator->fails()) {
@@ -60,36 +60,32 @@ class ProdukController extends Controller
         $namaGambar = null;
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
-            $namaGambar = time() . '_thumb_' . $file->getClientOriginalName();
+            $namaGambar = time() . '_thumb_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('gambar_teh'), $namaGambar);
         }
 
         $namaGambarFull = null;
         if ($request->hasFile('gambar_full')) {
             $file = $request->file('gambar_full');
-            $namaGambarFull = time() . '_full_' . $file->getClientOriginalName();
+            $namaGambarFull = time() . '_full_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('gambar_teh'), $namaGambarFull);
         }
 
-<<<<<<< HEAD
-        // Cari kategori dari nama yang dibuat
+        // Cari kategori dari nama
         $kategori = Kategori::firstOrCreate(['nama_kategori' => $request->kategori]);
 
         $produk = Produk::create([
             'user_id'     => $request->user()->id,
             'nama_teh'    => $request->nama_teh,
             'kategori_id' => $kategori->id,
-=======
-        $produk = Produk::create([
-            'nama_teh'    => $request->nama_teh,
-            'kategori'    => $request->kategori,
->>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
             'harga'       => $request->harga,
             'deskripsi'   => $request->deskripsi,
             'gambar'      => $namaGambar,
             'gambar_full' => $namaGambarFull,
             'stok'        => $request->stok,
         ]);
+
+        $this->lupakanCacheProduk();
 
         return response()->json([
             'success' => true,
@@ -98,7 +94,6 @@ class ProdukController extends Controller
         ], 201);
     }
 
-<<<<<<< HEAD
     public function update(Request $request, $id)
     {
         $produk = Produk::find($id);
@@ -147,7 +142,7 @@ class ProdukController extends Controller
         if ($request->hasFile('gambar')) {
             $this->hapusFileGambar($produk->gambar);
             $file = $request->file('gambar');
-            $namaGambar = time() . '_thumb_' . $file->getClientOriginalName();
+            $namaGambar = time() . '_thumb_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('gambar_teh'), $namaGambar);
             $produk->gambar = $namaGambar;
         }
@@ -155,12 +150,14 @@ class ProdukController extends Controller
         if ($request->hasFile('gambar_full')) {
             $this->hapusFileGambar($produk->gambar_full);
             $file = $request->file('gambar_full');
-            $namaGambarFull = time() . '_full_' . $file->getClientOriginalName();
+            $namaGambarFull = time() . '_full_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('gambar_teh'), $namaGambarFull);
             $produk->gambar_full = $namaGambarFull;
         }
 
         $produk->save();
+
+        $this->lupakanCacheProduk();
 
         return response()->json([
             'success' => true,
@@ -193,6 +190,8 @@ class ProdukController extends Controller
 
         $produk->delete();
 
+        $this->lupakanCacheProduk();
+
         return response()->json([
             'success' => true,
             'message' => 'Produk berhasil dihapus!',
@@ -212,16 +211,14 @@ class ProdukController extends Controller
 
     public function getBestSeller()
     {
-        $bestSeller = Produk::with('kategoriRelasi:id,nama_kategori')
-            ->withCount('orders')
-=======
-    public function getBestSeller()
-    {
-        $bestSeller = Produk::withCount('orders')
->>>>>>> 54adf99378b1f88c47561a8e1ebee2f44065be40
-            ->orderBy('orders_count', 'desc')
-            ->take(5)
-            ->get();
+        $bestSeller = Cache::remember('produk_best_seller', 60, function () {
+            return Produk::with('kategoriRelasi:id,nama_kategori')
+                ->withCount('orders')
+                ->withAvg('ulasans', 'rating')
+                ->orderBy('orders_count', 'desc')
+                ->take(5)
+                ->get();
+        });
 
         return response()->json([
             'success' => true,
