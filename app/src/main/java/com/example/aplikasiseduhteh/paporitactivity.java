@@ -67,7 +67,7 @@ public class paporitactivity extends AppCompatActivity {
                             String namaGambar     = model.getGambar()     != null ? model.getGambar()     : "";
                             String namaGambarFull = model.getGambarFull() != null ? model.getGambarFull() : "";
 
-                            listPaporit.add(new Teh(
+                            Teh tehFav = new Teh(
                                     model.getId(),
                                     model.getNamaTeh(),
                                     hargaFormat,
@@ -76,7 +76,9 @@ public class paporitactivity extends AppCompatActivity {
                                     namaGambarFull,
                                     model.getStok(),
                                     model.getKategori()
-                            ));
+                            );
+                            tehFav.setSellerId(model.getSellerId());
+                            listPaporit.add(tehFav);
                         }
                         adapter.notifyDataSetChanged();
                     }

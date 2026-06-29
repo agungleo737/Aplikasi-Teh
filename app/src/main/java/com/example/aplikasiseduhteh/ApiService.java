@@ -87,6 +87,52 @@ public interface ApiService {
     @GET("api/orders")
     Call<ResponseBody> getRiwayat(@Header("Authorization") String token);
 
+    // Pembeli konfirmasi
+    @POST("api/orders/{id}/terima")
+    Call<ResponseBody> terimaPesanan(
+            @Path("id") int id,
+            @Header("Authorization") String token
+    );
+
+    // Pesanan masuk
+    @GET("api/penjualan")
+    Call<ResponseBody> getPenjualan(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("api/penjualan/{id}/proses")
+    Call<ResponseBody> prosesPesanan(
+            @Path("id") int id,
+            @Header("Authorization") String token,
+            @Field("estimasi_siap") String estimasiSiap,
+            @Field("estimasi_kirim") String estimasiKirim
+    );
+
+    @POST("api/penjualan/{id}/kirim")
+    Call<ResponseBody> kirimPesanan(
+            @Path("id") int id,
+            @Header("Authorization") String token
+    );
+
+    // Rating
+    @GET("api/produk/{id}/ulasan")
+    Call<ResponseBody> getUlasan(@Path("id") int id);
+
+    @FormUrlEncoded
+    @POST("api/produk/{id}/ulasan")
+    Call<ResponseBody> kirimUlasan(
+            @Path("id") int id,
+            @Header("Authorization") String token,
+            @Field("rating") int rating,
+            @Field("komentar") String komentar
+    );
+
+    // Notifikasi server
+    @GET("api/notifikasi")
+    Call<ResponseBody> getNotifikasiServer(@Header("Authorization") String token);
+
+    @POST("api/notifikasi/baca-semua")
+    Call<ResponseBody> bacaSemuaNotif(@Header("Authorization") String token);
+
     @Multipart
     @POST("api/produk/{id}")
     Call<ResponseBody> updateProduk(

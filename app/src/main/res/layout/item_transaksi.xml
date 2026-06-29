@@ -27,6 +27,13 @@
             android:text="Es Teh Original"/>
 
         <TextView
+            android:id="@+id/txtPembeli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#656d3f"
+            android:text="Pembeli: -"/>
+
+        <TextView
             android:id="@+id/txtHarga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,13 +43,35 @@
             android:id="@+id/txtStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Berhasil"/>
+            android:textStyle="bold"
+            android:textColor="#40513B"
+            android:text="Menunggu"/>
+
+        <TextView
+            android:id="@+id/txtEstimasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#8C8C8C"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:text="Estimasi: -"/>
 
         <TextView
             android:id="@+id/txtTanggal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25 Juni 2026"/>
+
+        <Button
+            android:id="@+id/btnAksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#40513B"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="Verifikasi &amp; Kemas"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

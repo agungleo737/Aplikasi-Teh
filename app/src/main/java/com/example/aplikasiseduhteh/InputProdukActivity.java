@@ -4,16 +4,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -24,7 +30,11 @@ import retrofit2.Response;
 
 public class InputProdukActivity extends AppCompatActivity {
 
-    private EditText etNama, etKategori, etHarga, etStok, etDeskripsi;
+    private EditText etNama, etHarga, etStok, etDeskripsi;
+    private Spinner spKategori;
+    private final List<String> kategoriList = new ArrayList<>();
+    private ArrayAdapter<String> kategoriAdapter;
+    private String kategoriTerpilihAwal = null; // utk preselect mode edit
     private ImageView btnBackInput, imgPreviewThumb, imgPreviewFull;
     private Button btnPilihThumb, btnPilihFull, btnSimpan;
     private Uri uriThumb = null;
@@ -58,7 +68,7 @@ public class InputProdukActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_produk);
         etNama        = findViewById(R.id.et_nama_teh);
-        etKategori    = findViewById(R.id.et_kategori_teh);
+        spKategori    = findViewById(R.id.sp_kategori_teh);
         etHarga       = findViewById(R.id.et_harga_teh);
         etStok        = findViewById(R.id.et_stok_teh);
         etDeskripsi   = findViewById(R.id.et_deskripsi_teh);
@@ -70,16 +80,23 @@ public class InputProdukActivity extends AppCompatActivity {
         imgPreviewFull  = findViewById(R.id.img_preview_full);
 
         session = new SessionManager(this);
+
+        // Dropdown kategori
+        kategoriAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, kategoriList);
+        spKategori.setAdapter(kategoriAdapter);
+
         if ("edit".equals(getIntent().getStringExtra("mode"))) {
             editMode = true;
             produkId = getIntent().getIntExtra("id", -1);
             etNama.setText(getIntent().getStringExtra("nama"));
-            etKategori.setText(getIntent().getStringExtra("kategori"));
+            kategoriTerpilihAwal = getIntent().getStringExtra("kategori");
             etHarga.setText(getIntent().getStringExtra("harga"));
             etStok.setText(getIntent().getStringExtra("stok"));
             etDeskripsi.setText(getIntent().getStringExtra("deskripsi"));
             btnSimpan.setText("Update Produk");
         }
+
+        muatKategori();
 
         btnBackInput.setOnClickListener(v -> finish());
 
@@ -93,6 +110,44 @@ public class InputProdukActivity extends AppCompatActivity {
             launcherFull.launch(intent);
         });
         btnSimpan.setOnClickListener(v -> simpanProduk());
+    }
+
+    private void muatKategori() {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.getKategori(session.gettoken()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    if (response.isSuccessful() && response.body() != null) {
+                        JSONObject obj = new JSONObject(response.body().string());
+                        JSONArray data = obj.optJSONArray("data");
+                        kategoriList.clear();
+                        if (data != null) {
+                            for (int i = 0; i < data.length(); i++) {
+                                String nama = data.getJSONObject(i).optString("nama_kategori");
+                                if (!nama.isEmpty()) kategoriList.add(nama);
+                            }
+                        }
+                        kategoriAdapter.notifyDataSetChanged();
+
+                        // Preselect kategori
+                        if (kategoriTerpilihAwal != null) {
+                            int idx = kategoriList.indexOf(kategoriTerpilihAwal);
+                            if (idx >= 0) spKategori.setSelection(idx);
+                        }
+                    } else {
+                        Toast.makeText(InputProdukActivity.this, "Gagal memuat kategori.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(InputProdukActivity.this, "Error kategori: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(InputProdukActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private File uriToFile(Uri uri, String prefix) throws Exception {
@@ -111,13 +166,13 @@ public class InputProdukActivity extends AppCompatActivity {
 
     private void simpanProduk() {
         String nama      = etNama.getText().toString().trim();
-        String kategori  = etKategori.getText().toString().trim();
+        String kategori  = spKategori.getSelectedItem() != null ? spKategori.getSelectedItem().toString().trim() : "";
         String hargaStr  = etHarga.getText().toString().trim();
         String stokStr   = etStok.getText().toString().trim();
         String deskripsi = etDeskripsi.getText().toString().trim();
 
         if (nama.isEmpty() || kategori.isEmpty() || hargaStr.isEmpty() || stokStr.isEmpty() || deskripsi.isEmpty()) {
-            Toast.makeText(this, "Semua data wajib diisi!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Semua data wajib diisi! (kategori belum dipilih?)", Toast.LENGTH_SHORT).show();
             return;
         }
 

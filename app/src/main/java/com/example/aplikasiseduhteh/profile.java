@@ -29,6 +29,12 @@ public class profile extends AppCompatActivity {
                     startActivity(new Intent(profile.this, KelolaProdukActivity.class)));
         }
 
+        View btnPesananMasuk = findViewById(R.id.btn_pesanan_masuk);
+        if (btnPesananMasuk != null) {
+            btnPesananMasuk.setOnClickListener(v ->
+                    startActivity(new Intent(profile.this, TransaksiActivity.class)));
+        }
+
         View btnManageAccount = findViewById(R.id.btn_manage_account);
         if (btnManageAccount != null) {
             btnManageAccount.setOnClickListener(v ->

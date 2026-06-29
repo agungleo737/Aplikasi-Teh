@@ -59,6 +59,38 @@
                 android:text="1 x Rp 0"
                 android:textColor="#6B7280"
                 android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_riwayat_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Status: -"
+                android:textColor="#40513B"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_riwayat_estimasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Estimasi: -"
+                android:textColor="#9AA199"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_terima"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#40513B"
+                android:text="Pesanan Diterima"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView

@@ -286,6 +286,32 @@
                             android:layout_height="24dp"
                             android:src="@drawable/pro6" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_pesanan_masuk"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="16dp">
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/pro16" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:text="Pesanan Masuk (Penjual)"
+                            android:textColor="#FFFFFF" />
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/pro6" />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <TextView

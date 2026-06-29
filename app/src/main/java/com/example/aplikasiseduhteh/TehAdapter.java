@@ -80,6 +80,7 @@ public class TehAdapter extends RecyclerView.Adapter<TehAdapter.TehViewHolder> {
             intent.putExtra("GAMBAR_FULL_NAMA", dataTeh.getGambarFullNama());
             intent.putExtra("STOK_TEH", dataTeh.getStok());
             intent.putExtra("KATEGORI_TEH", dataTeh.getKategori());
+            intent.putExtra("SELLER_ID", dataTeh.getSellerId());
             context.startActivity(intent);
         });
     }

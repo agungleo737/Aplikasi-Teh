@@ -19,6 +19,7 @@ public class Teh {
     private String gambarnama;
     private String gambarfullnama;
     private int qtyDibeli = 1;
+    private int sellerId = 0;
 
     public Teh(int id, String nama, String harga, String deskripsi,
                String gambarNama, String gambarFullNama, int stok, String kategori) {
@@ -46,4 +47,6 @@ public class Teh {
     public int getQtyDibeli() { return qtyDibeli; }
     public void setQtyDibeli(int qty) { this.qtyDibeli = qty; }
     public void setStok(int stok) { this.stok = stok; }
+    public int getSellerId() { return sellerId; }
+    public void setSellerId(int sellerId) { this.sellerId = sellerId; }
 }

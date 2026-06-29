@@ -8,9 +8,13 @@ public class RiwayatModel {
     private final long hargaSatuan;
     private final long totalHarga;
     private final String gambar;
+    private final String status;
+    private final String estimasiSiap;
+    private final String estimasiKirim;
 
     public RiwayatModel(int id, String tanggal, String namaProduk,
-                        int jumlahBeli, long hargaSatuan, long totalHarga, String gambar) {
+                        int jumlahBeli, long hargaSatuan, long totalHarga, String gambar,
+                        String status, String estimasiSiap, String estimasiKirim) {
         this.id          = id;
         this.tanggal     = tanggal;
         this.namaProduk  = namaProduk;
@@ -18,6 +22,9 @@ public class RiwayatModel {
         this.hargaSatuan = hargaSatuan;
         this.totalHarga  = totalHarga;
         this.gambar      = gambar;
+        this.status      = status;
+        this.estimasiSiap = estimasiSiap;
+        this.estimasiKirim = estimasiKirim;
     }
 
     public int getId()           { return id; }
@@ -27,4 +34,7 @@ public class RiwayatModel {
     public long getHargaSatuan() { return hargaSatuan; }
     public long getTotalHarga()  { return totalHarga; }
     public String getGambar()    { return gambar; }
+    public String getStatus()    { return status; }
+    public String getEstimasiSiap()  { return estimasiSiap; }
+    public String getEstimasiKirim() { return estimasiKirim; }
 }

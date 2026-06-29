@@ -26,9 +26,14 @@ public class TehModel {
     @SerializedName("gambar_full")
     private String gambarFull;
 
+    // Pemilik/penjual produk
+    @SerializedName("user_id")
+    private int sellerId;
+
 
     // Getter
     public int getId() { return id; }
+    public int getSellerId() { return sellerId; }
     public String getNamaTeh() { return namaTeh; }
     public String getKategori() { return kategori; }
     public double getHarga() { return harga; }

@@ -6,13 +6,20 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.List;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class notifuy extends AppCompatActivity {
     private ImageView btnBack;
     private View layoutKosong;
     private RecyclerView rvNotif;
-    private List<notifmodel> listNotif;
+    private List<notifmodel> listNotif = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +38,55 @@ public class notifuy extends AppCompatActivity {
             rvNotif.setLayoutManager(new LinearLayoutManager(this));
         }
 
-        listNotif = notifmanager.getList(this);
-        checkNotification();
+        muatNotifServer();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        listNotif = notifmanager.getList(this);
-        checkNotification();
+        muatNotifServer();
+    }
+    private void muatNotifServer() {
+        SessionManager session = new SessionManager(this);
+        ApiService api = ApiClient.getClient().create(ApiService.class);
+        api.getNotifikasiServer(session.gettoken()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                List<notifmodel> hasil = new ArrayList<>();
+                try {
+                    if (response.isSuccessful() && response.body() != null) {
+                        JSONObject root = new JSONObject(response.body().string());
+                        JSONObject data = root.optJSONObject("data");
+                        JSONArray arr = data != null ? data.optJSONArray("notifikasi") : null;
+                        if (arr != null) {
+                            for (int i = 0; i < arr.length(); i++) {
+                                JSONObject n = arr.getJSONObject(i);
+                                hasil.add(new notifmodel(
+                                        n.optString("judul"),
+                                        n.optString("pesan")));
+                            }
+                        }
+                        listNotif = hasil;
+                        // Tandai sudah dibaca
+                        api.bacaSemuaNotif(session.gettoken()).enqueue(new Callback<ResponseBody>() {
+                            @Override public void onResponse(Call<ResponseBody> c, Response<ResponseBody> r) {}
+                            @Override public void onFailure(Call<ResponseBody> c, Throwable t) {}
+                        });
+                    } else {
+                        listNotif = notifmanager.getList(notifuy.this);
+                    }
+                } catch (Exception e) {
+                    listNotif = notifmanager.getList(notifuy.this);
+                }
+                checkNotification();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                listNotif = notifmanager.getList(notifuy.this);
+                checkNotification();
+            }
+        });
     }
 
     private void checkNotification() {

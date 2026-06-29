@@ -111,6 +111,7 @@ public class category extends AppCompatActivity {
                                         model.getStok(),
                                         model.getKategori()
                                 );
+                                teh.setSellerId(model.getSellerId());
                                 filteredList.add(teh);
                                 allList.add(teh);
                             }
@@ -118,7 +119,6 @@ public class category extends AppCompatActivity {
                     }
 
                     adapter.notifyDataSetChanged();
-                    // Sinkron status favorit
                     FavoritManager.refresh(category.this, () -> adapter.notifyDataSetChanged());
 
                     if (filteredList.isEmpty()) {

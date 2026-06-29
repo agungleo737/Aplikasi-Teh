@@ -36,7 +36,7 @@ public class RiwayatActivity extends AppCompatActivity {
         findViewById(R.id.btn_back_riwayat).setOnClickListener(v -> finish());
 
         rvRiwayat.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RiwayatAdapter(this, list);
+        adapter = new RiwayatAdapter(this, list, this::loadRiwayat);
         rvRiwayat.setAdapter(adapter);
 
         loadRiwayat();
@@ -70,7 +70,10 @@ public class RiwayatActivity extends AppCompatActivity {
                                     o.optInt("jumlah_beli"),
                                     o.optLong("harga_satuan"),
                                     o.optLong("total_harga"),
-                                    o.isNull("gambar") ? null : o.optString("gambar")
+                                    o.isNull("gambar") ? null : o.optString("gambar"),
+                                    o.optString("status", "menunggu"),
+                                    o.isNull("estimasi_siap")  ? "" : o.optString("estimasi_siap"),
+                                    o.isNull("estimasi_kirim") ? "" : o.optString("estimasi_kirim")
                             ));
                         }
                     }

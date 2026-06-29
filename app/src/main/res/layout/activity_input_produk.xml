@@ -67,15 +67,13 @@
                 android:textColor="#40513B"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
-            <EditText
-                android:id="@+id/et_kategori_teh"
+            <Spinner
+                android:id="@+id/sp_kategori_teh"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginBottom="20dp"
                 android:background="@android:drawable/editbox_background"
-                android:hint="Pilih kategori yang sesuai"
-                android:paddingHorizontal="15dp"
-                android:inputType="text" />
+                android:paddingHorizontal="15dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,8 +124,6 @@
                 android:inputType="textMultiLine"
                 android:padding="15dp"
                 android:layout_marginBottom="25dp" />
-
-            <!-- Thumbnail -->
             <Button
                 android:id="@+id/btn_pilih_thumbnail"
                 android:layout_width="match_parent"

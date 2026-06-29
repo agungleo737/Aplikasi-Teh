@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                     model.getStok(),
                                     model.getKategori()
                             );
+                            tehBaru.setSellerId(model.getSellerId());
                             listData.add(tehBaru);
                         }
                         adapter.notifyDataSetChanged();

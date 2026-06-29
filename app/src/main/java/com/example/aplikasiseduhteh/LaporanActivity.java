@@ -37,7 +37,11 @@ public class LaporanActivity extends AppCompatActivity {
         if (back != null) back.setOnClickListener(v -> finish());
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TransaksiAdapter(list);
+        // Laporan admin
+        adapter = new TransaksiAdapter(list, new TransaksiAdapter.AksiListener() {
+            @Override public void onProses(TransaksiModel m) {}
+            @Override public void onKirim(TransaksiModel m) {}
+        });
         rv.setAdapter(adapter);
 
         loadLaporan();
@@ -68,7 +72,9 @@ public class LaporanActivity extends AppCompatActivity {
                                     + "  (x" + o.optInt("jumlah_beli") + ")";
                             String harga   = "Rp " + o.optLong("total_harga");
                             list.add(new TransaksiModel(
-                                    invoice, produk, harga, "Berhasil", o.optString("tanggal")));
+                                    o.optInt("id_belanja"), invoice, produk,
+                                    o.optString("pembeli_nama", "-"), harga,
+                                    "selesai", o.optString("tanggal"), "", ""));
                         }
                     }
                     adapter.notifyDataSetChanged();
