@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="seduh_dark_green">#5B6E4E</color>
+    <color name="seduh_light_cream">#F5F5E9</color>
+    <color name="cream">#F6F1E4</color>
+    <color name="cream_deep">#EFE7D3</color>
+    <color name="ink">#2E2A1F</color>
+    <color name="ink_soft">#5B5644</color>
+    <color name="amber">#C17F3B</color>
+    <color name="amber_deep">#9C5F26</color>
+    <color name="tea">#4B5A3D</color>
+    <color name="tea_deep">#38432D</color>
+    <color name="card">#FBF8EF</color>
+    <color name="line_border">#1A2E2A1F</color>
+    <color name="mission_text">#E7E0C9</color>
+    <color name="mission_check">#C9A86A</color>
+
+    <!-- Warna panel admin (Daftar Pengguna) -->
+    <color name="colorPrimary">#2D4A1E</color>
+    <color name="colorPrimaryDark">#1E3213</color>
+    <color name="colorAccent">#4A7C2F</color>
+    <color name="colorBackground">#F5F2EC</color>
+    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorTextPrimary">#1A1A1A</color>
+    <color name="colorTextSecondary">#555555</color>
+    <color name="colorTextHint">#999999</color>
+    <color name="colorBadgePenjualBg">#E8F5E1</color>
+    <color name="colorBadgePenjualText">#3A7D1E</color>
+    <color name="colorBadgePembeliBg">#E3EDFF</color>
+    <color name="colorBadgePembeliText">#1A56DB</color>
+    <color name="colorTabSelected">#2D4A1E</color>
+    <color name="colorTabUnselected">#FFFFFF</color>
+    <color name="colorTabBorder">#CCCCCC</color>
+    <color name="colorSearchBg">#FFFFFF</color>
+    <color name="colorBottomNavBg">#FFFFFF</color>
+    <color name="colorShadow">#1A000000</color>
+    <color name="colorIconTint">#777777</color>
+    <color name="colorIconActiveTint">#2D4A1E</color>
+    <color name="colorDivider">#EEEEEE</color>
+</resources>

@@ -1,0 +1,15 @@
+/vendor
+/node_modules
+.env
+.env.backup
+storage/framework/
+storage/logs/
+bootstrap/cache/
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+*.zip

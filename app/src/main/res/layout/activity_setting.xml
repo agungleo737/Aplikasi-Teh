@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorPrimary"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/btnBackSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="‹"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:paddingEnd="16dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengaturan Admin"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tambah Admin Baru"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:text="Buat akun admin baru untuk mengelola aplikasi"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etAdminNama"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="14dp"
+                android:hint="Nama admin"
+                android:textColorHint="@color/colorTextHint"
+                android:textColor="@color/colorTextPrimary"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/etAdminEmail"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="14dp"
+                android:hint="Email"
+                android:textColorHint="@color/colorTextHint"
+                android:textColor="@color/colorTextPrimary"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/etAdminPassword"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_search"
+                android:paddingHorizontal="14dp"
+                android:hint="Password (min. 6 karakter)"
+                android:textColorHint="@color/colorTextHint"
+                android:textColor="@color/colorTextPrimary"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/btnTambahAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tambah Admin"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:backgroundTint="@color/colorPrimary"
+                android:padding="14dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="28dp"
+                android:background="@color/colorDivider" />
+
+            <Button
+                android:id="@+id/btnLogoutSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:backgroundTint="#FFFFFF"
+                android:padding="14dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
