@@ -1,58 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍵 Aplikasi Seduh Teh
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Seduh Teh adalah proyek aplikasi pemesanan minuman teh yang dikembangkan untuk mempermudah pelanggan melihat produk dan melakukan pemesanan secara digital.
 
-## About Laravel
+Repository ini menggabungkan backend berbasis Laravel, frontend web, dan komponen proyek Android.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Menampilkan informasi produk teh.
+- Menampilkan harga dan deskripsi produk.
+- Antarmuka pemesanan minuman.
+- Backend untuk mendukung pengelolaan data aplikasi.
+- Integrasi database untuk menyimpan data aplikasi.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+*Catatan: Fitur di atas perlu disesuaikan dengan implementasi yang benar-benar sudah tersedia.*
 
-## Learning Laravel
+## 🛠️ Teknologi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Teknologi | Kegunaan |
+|---|---|
+| PHP | Bahasa pemrograman backend |
+| Laravel | Framework backend |
+| MySQL | Database, jika dikonfigurasi |
+| JavaScript | Kebutuhan frontend |
+| Vite | Build tool frontend |
+| Gradle | Build system proyek Android |
+| Git & GitHub | Version control |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📁 Struktur Repository
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```text
+Aplikasi-Teh/
+├── app/                # Kode backend Laravel
+├── bootstrap/          # Bootstrap aplikasi Laravel
+├── config/             # Konfigurasi aplikasi
+├── database/           # Migration dan seeder
+├── frontend/           # Komponen frontend
+├── public/             # Aset publik
+├── resources/          # Resource aplikasi
+├── routes/             # Routing Laravel
+├── tests/              # Pengujian aplikasi
+├── build.gradle        # Konfigurasi Gradle
+├── composer.json       # Dependency PHP
+├── package.json        # Dependency JavaScript
+├── settings.gradle     # Pengaturan proyek Gradle
+└── README.md
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## ⚙️ Instalasi Backend
 
-## Contributing
+### Prasyarat
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP dengan ekstensi yang dibutuhkan Laravel.
+- Composer.
+- Database sesuai konfigurasi proyek.
+- Node.js dan npm jika frontend memerlukannya.
 
-## Code of Conduct
+### Langkah instalasi
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Clone repository:
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/agungleo737/Aplikasi-Teh.git
+cd Aplikasi-Teh
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Instal dependency PHP:
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Siapkan konfigurasi environment:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Pada Windows PowerShell, perintah penyalinan file dapat menggunakan:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Sesuaikan konfigurasi database pada `.env`, kemudian jalankan migration jika diperlukan oleh aplikasi:
+
+```bash
+php artisan migrate
+```
+
+Jalankan server backend:
+
+```bash
+php artisan serve
+```
+
+## 🖥️ Instalasi Frontend
+
+Periksa apakah frontend memiliki `package.json` sendiri di dalam folder `frontend/`. Jika ada, masuk ke folder tersebut:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Jika `package.json` hanya berada di direktori utama, jalankan perintah npm dari direktori utama.
+
+## 📱 Aplikasi Android
+
+Repository juga memiliki konfigurasi Gradle. Untuk menjalankan bagian Android, buka proyek menggunakan Android Studio dan periksa konfigurasi SDK serta modul aplikasi yang tersedia.
+
+## 🔐 Keamanan
+
+- Jangan mengunggah file `.env` yang berisi kredensial.
+- Gunakan `.env.example` untuk mendokumentasikan variabel konfigurasi.
+- Jangan menyimpan password database atau API key secara langsung di source code.
+
+## 🚧 Status Proyek
+
+Proyek ini dikembangkan dan dapat mengalami perubahan selama proses pengembangan.
+
+## 👨‍💻 Author
+
+**Agung Leo**
+
+GitHub: https://github.com/agungleo737
+
+## 📄 License
+
+Lisensi proyek belum ditentukan.
